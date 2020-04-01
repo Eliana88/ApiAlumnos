@@ -14,9 +14,9 @@
 	<name>app-alumnos-irso</name>
 	<description>Api Alumnos</description>
 
-	<properties>
+<!-- 	<properties>
 		<java.version>11</java.version>
-	</properties>
+	</properties> -->
 
 	<dependencies>
 		<dependency>
