@@ -39,7 +39,13 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	@Transactional(readOnly = true)
 	public Alumno findByEmail(String email) {
 		// TODO Auto-generated method stub
-		return alumnoDao.findByEmail(email);
+		Alumno alumno = alumnoDao.findByEmail(email);
+
+		if (alumno != null)
+			return alumno;
+		else	
+			throw new ResourceNotFoundException("Alumno no encontrado con ID: " + email);		
+		
 	}
 
 	@Override
