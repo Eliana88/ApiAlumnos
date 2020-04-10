@@ -1,4 +1,4 @@
-package com.irso.apialumnos.exception;
+package com.irso.apialumnos.exceptions;
 
 import java.util.Date;
 
