@@ -13,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 @Entity
 @Table(name = "alumnos")
 public class Alumno implements Serializable {
@@ -35,7 +36,7 @@ public class Alumno implements Serializable {
     @Size(min=10, max=50)
 	@Column(name = "email", nullable = false , unique=true)
 	private String email;
-    
+      
 
 	public long getId() {
 		return id;

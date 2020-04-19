@@ -1,6 +1,7 @@
 package com.irso.apialumnos.services;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,9 +44,9 @@ public class AlumnoServiceImpl implements IAlumnoService {
 
 		if (alumno != null)
 			return alumno;
-		else	
-			throw new ResourceNotFoundException("Alumno no encontrado con ID: " + email);		
-		
+		else
+			throw new ResourceNotFoundException("Alumno no encontrado con Email: " + email);
+
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	public Alumno save(Alumno alumno, BindingResult result) {
 		// TODO Auto-generated method stub
 		if (result.hasErrors())
-			throw new ValidationException("Request Body error: " + result);
+			throw new ValidationException("Request Body Error en: " + result);
 
 		String email = alumno.getEmail();
 

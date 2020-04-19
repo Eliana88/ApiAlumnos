@@ -20,7 +20,8 @@ public class GlobalExceptionHandler {
 	private String error500 = "Ha ocurrido un error inesperado.";
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler(ResourceNotFoundException.class)
+	@ExceptionHandler({ResourceNotFoundException.class,
+		org.springframework.security.core.userdetails.UsernameNotFoundException.class})
 	@ResponseBody
 	public ErrorDetails notFound(HttpServletRequest request, Exception exception) {
 		return new ErrorDetails(new Date(), exception.getMessage(), request.getRequestURI());
@@ -50,6 +51,22 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(ConflictException.class)
 	@ResponseBody
 	public ErrorDetails conflict(HttpServletRequest request, Exception exception) {
+		return new ErrorDetails(new Date(), exception.getMessage(), request.getRequestURI());
+	}
+	
+	@ResponseStatus(HttpStatus.FORBIDDEN)
+	@ExceptionHandler(ForbiddenException.class)
+	@ResponseBody
+	public ErrorDetails forbidden(HttpServletRequest request, Exception exception) {
+		return new ErrorDetails(new Date(), exception.getMessage(), request.getRequestURI());
+	}
+	
+	@ResponseStatus(HttpStatus.UNAUTHORIZED)
+	@ExceptionHandler({UnauthorizedException.class,
+		org.springframework.security.access.AccessDeniedException.class,
+	})
+	@ResponseBody
+	public ErrorDetails unauthorized(HttpServletRequest request, Exception exception) {
 		return new ErrorDetails(new Date(), exception.getMessage(), request.getRequestURI());
 	}
 

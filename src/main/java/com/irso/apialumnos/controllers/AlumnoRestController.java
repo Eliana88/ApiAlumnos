@@ -7,8 +7,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,9 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.irso.apialumnos.models.entity.Alumno;
 import com.irso.apialumnos.services.IAlumnoService;
 
-@CrossOrigin(origins = { "http://localhost:4200", })
 @RestController
-@RequestMapping("/presencial")
+@RequestMapping("presencial")
 public class AlumnoRestController {
 
 	@Autowired
@@ -34,6 +33,8 @@ public class AlumnoRestController {
 		return alumnoService.findAll();
 	}
 
+	
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/alumnos/{id}") //presencial/alumnos/id
 	public ResponseEntity<Alumno> getAlumnoById(@PathVariable(value = "id") Long alumnoId) {
 
@@ -41,7 +42,8 @@ public class AlumnoRestController {
 
 		return ResponseEntity.ok().body(alumno);
 	}
-
+	
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@GetMapping("/alumnos/emails/{email}") //presencial/alumnos/emails/email
 	public ResponseEntity<Alumno> getAlumnoByEmail(@PathVariable(value = "email") String alumnoEmail) {
 
@@ -51,14 +53,17 @@ public class AlumnoRestController {
 
 		return ResponseEntity.ok().body(alumno);
 	}
-
+	
+	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/alumnos")
 	@ResponseStatus(HttpStatus.CREATED) // guarda los datos enviados
 	private Alumno create(@Valid @RequestBody Alumno alumno, BindingResult result) {
 
 		return alumnoService.save(alumno, result);
 	}
-
+	
+	@Secured("ROLE_ADMIN")
 	@PutMapping("/alumnos/{id}")
 	private Alumno update(@Valid @RequestBody Alumno alumnoDetails, BindingResult result, @PathVariable Long id) {
 
@@ -66,7 +71,8 @@ public class AlumnoRestController {
 
 		return alumnoService.update(alumnoDetails, result);
 	}
-
+	
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/alumnos/{id}")
 	private void delete(@PathVariable Long id) {
 
