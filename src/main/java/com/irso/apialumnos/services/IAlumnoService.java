@@ -9,6 +9,8 @@ import com.irso.apialumnos.models.entity.Alumno;
 public interface IAlumnoService {
 
 	public List<Alumno> findAll();
+	
+	public List<Alumno> findAllByOrderByIdAsc();
 
 	public Alumno findById(Long id);
 
@@ -16,7 +18,7 @@ public interface IAlumnoService {
 
 	public Alumno save(Alumno alumno, BindingResult result);
 
-	public Alumno update(Alumno alumno, BindingResult result);
+	public Alumno update(Alumno alumno, BindingResult result, Alumno alumnoActual);
 
 	public void delete(Long id);
 

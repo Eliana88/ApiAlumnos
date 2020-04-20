@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
 			org.springframework.dao.DuplicateKeyException.class,
 			org.springframework.web.bind.MissingRequestHeaderException.class,
 			org.springframework.web.bind.MissingServletRequestParameterException.class,
-			org.springframework.http.converter.HttpMessageNotReadableException.class })
+			org.springframework.http.converter.HttpMessageNotReadableException.class})
 	@ResponseBody
 	public ErrorDetails badRequest(HttpServletRequest request, Exception exception) {
 		return new ErrorDetails(new Date(), exception.getMessage(), request.getRequestURI());
@@ -54,21 +54,6 @@ public class GlobalExceptionHandler {
 		return new ErrorDetails(new Date(), exception.getMessage(), request.getRequestURI());
 	}
 	
-	@ResponseStatus(HttpStatus.FORBIDDEN)
-	@ExceptionHandler(ForbiddenException.class)
-	@ResponseBody
-	public ErrorDetails forbidden(HttpServletRequest request, Exception exception) {
-		return new ErrorDetails(new Date(), exception.getMessage(), request.getRequestURI());
-	}
-	
-	@ResponseStatus(HttpStatus.UNAUTHORIZED)
-	@ExceptionHandler({UnauthorizedException.class,
-		org.springframework.security.access.AccessDeniedException.class,
-	})
-	@ResponseBody
-	public ErrorDetails unauthorized(HttpServletRequest request, Exception exception) {
-		return new ErrorDetails(new Date(), exception.getMessage(), request.getRequestURI());
-	}
 
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
