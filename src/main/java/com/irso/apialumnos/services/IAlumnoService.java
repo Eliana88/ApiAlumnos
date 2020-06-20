@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.validation.BindingResult;
 
 import com.irso.apialumnos.models.entity.Alumno;
+import com.irso.apialumnos.models.entity.AlumnoSoloAfiliado;
 
 public interface IAlumnoService {
 
@@ -21,5 +22,8 @@ public interface IAlumnoService {
 	public Alumno update(Alumno alumno, BindingResult result, Alumno alumnoActual);
 
 	public void delete(Long id);
+	
+	public Alumno replace(AlumnoSoloAfiliado alumnoAfiliado, Alumno alumno);
+	
 
 }

@@ -1,12 +1,12 @@
 package com.irso.apialumnos.exceptions;
 
 import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
 			org.springframework.web.bind.MissingServletRequestParameterException.class,
 			org.springframework.http.converter.HttpMessageNotReadableException.class})
 	@ResponseBody
-	public ErrorDetails badRequest(HttpServletRequest request, Exception exception) {
+	public ErrorDetails badRequest(HttpServletRequest request, Exception exception) {		 
 		return new ErrorDetails(new Date(), exception.getMessage(), request.getRequestURI());
 	}
 

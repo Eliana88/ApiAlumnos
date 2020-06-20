@@ -17,7 +17,7 @@ import com.irso.apialumnos.models.dao.IUsuarioDao;
 import com.irso.apialumnos.models.entity.Usuario;
 
 @Service
-public class UsuarioService implements IUsuarioService, UserDetailsService {
+public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 	
 	
 	@Autowired

@@ -22,21 +22,25 @@ public class Alumno implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@NotEmpty
+	@NotEmpty(message = "Nombre no puede ser nulo")
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	
-	@NotEmpty
+	@NotEmpty(message = "Apellido no puede ser nulo")
 	@Column(name = "apellido", nullable = false)
 	private String apellido;
 	
 	
     @NotNull
-    @Email(message = "Email debe ser válido")
-    @Size(min=10, max=50)
+    @Email(regexp="[a-zA-Z0-9_.]+@[a-zA-Z0-9]+.[a-zA-Z]{2,3}[.] {0,1}[a-zA-Z]+", message = "Email debe ser válido")
+    @Size(min=10, max=50, message = "Email debe contener entre 10 y 50 caracteres")
 	@Column(name = "email", nullable = false , unique=true)
 	private String email;
-      
+   
+    @Column(name = "afiliado", nullable = true)
+    @Size(min=1, max=1, message = "Afiliado debe ser 'S' o 'N'")
+	private String afiliado;
+    
 
 	public long getId() {
 		return id;
@@ -68,6 +72,14 @@ public class Alumno implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getAfiliado() {
+		return afiliado;
+	}
+
+	public void setAfiliado(String afiliado) {
+		this.afiliado = afiliado;
 	}
 
 	/**
