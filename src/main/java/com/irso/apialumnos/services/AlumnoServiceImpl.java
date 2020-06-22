@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -29,9 +31,14 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Alumno> findAll() {
-		// TODO Auto-generated method stub
 		return (List<Alumno>) alumnoDao.findAll();
 
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Alumno> findAll(Pageable pageable) {
+		return alumnoDao.findAll(pageable);
 	}
 
 	@Override
@@ -176,6 +183,8 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		
 		return alumnoDao.save(alumno);
 	}
+
+	
 
 
 }

@@ -6,6 +6,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -37,6 +40,13 @@ public class AlumnoRestController {
 	 * @GetMapping("/alumnos") private List<Alumno> index() { return
 	 * alumnoService.findAllByOrderByIdAsc(); }
 	 */
+	
+	@GetMapping("/alumnos/page/{page}")
+	private Page<Alumno> index(@PathVariable int page) {
+		Pageable pageable = PageRequest.of(page, 8);
+		return alumnoService.findAll(pageable);
+	}
+	 
 
 	@GetMapping("/alumnos") // presencial/alumnos/id public
 	private List<Alumno>  getAlumnoById(@RequestParam(required = false) String email) {

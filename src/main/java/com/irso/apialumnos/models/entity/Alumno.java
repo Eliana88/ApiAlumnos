@@ -23,6 +23,7 @@ public class Alumno implements Serializable {
 	private long id;
 
 	@NotEmpty(message = "Nombre no puede ser nulo")
+	@Size(min=3, max=50)
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	
