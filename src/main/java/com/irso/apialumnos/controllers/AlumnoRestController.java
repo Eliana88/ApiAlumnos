@@ -49,7 +49,7 @@ public class AlumnoRestController {
 	 
 
 	@GetMapping("/alumnos") // presencial/alumnos/id public
-	private List<Alumno>  getAlumnoById(@RequestParam(required = false) String email) {
+	private List<Alumno>  getAlumnos(@RequestParam(required = false) String email) {
 		
 		if (email == null) {
 			
