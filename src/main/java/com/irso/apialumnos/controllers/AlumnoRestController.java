@@ -1,7 +1,5 @@
 package com.irso.apialumnos.controllers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -36,33 +34,27 @@ public class AlumnoRestController {
 	@Autowired
 	private IAlumnoService alumnoService;
 
+	
 	/*
 	 * @GetMapping("/alumnos") private List<Alumno> index() { return
 	 * alumnoService.findAllByOrderByIdAsc(); }
 	 */
+	 
 	
-	@GetMapping("/alumnos/page/{page}")
-	private Page<Alumno> index(@PathVariable int page) {
-		Pageable pageable = PageRequest.of(page, 8);
-		return alumnoService.findAll(pageable);
-	}
+	/*
+	 * @GetMapping("/alumnos/page/{page}") private Page<Alumno> index(@PathVariable
+	 * int page) { Pageable pageable = PageRequest.of(page, 8); return
+	 * alumnoService.findAll(pageable); }
+	 */
 	 
 
-	@GetMapping("/alumnos") // presencial/alumnos/id public
-	private List<Alumno>  getAlumnos(@RequestParam(required = false) String email) {
-		
-		if (email == null) {
-			
-			return alumnoService.findAllByOrderByIdAsc();
+		@GetMapping("/alumnos") // presencial/alumnos/id public
+		private Page<Alumno> index(@RequestParam(required = true) int page) {
 
-			
-		} else {
-			
-			List<Alumno> alumnos = new ArrayList<Alumno> (Arrays.asList(alumnoService.findByEmail(email)));
-			return alumnos;
+			Pageable pageable = PageRequest.of(page, 8);
+			return alumnoService.findAll(pageable);
+
 		}
-
-	}
 
 
 	
