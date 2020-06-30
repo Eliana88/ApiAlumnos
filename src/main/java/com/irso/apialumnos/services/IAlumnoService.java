@@ -1,21 +1,14 @@
 package com.irso.apialumnos.services;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.BindingResult;
-
 import com.irso.apialumnos.models.entity.Alumno;
-import com.irso.apialumnos.models.entity.AlumnoSoloAfiliado;
 
 public interface IAlumnoService {
 
-	public List<Alumno> findAll();
 	
-	public Page<Alumno> findAll(Pageable pageable);
-	
-	public List<Alumno> findAllByOrderByIdAsc();
+	public Page<Alumno> findAllByOrderByIdAsc(Pageable pageable);
 
 	public Alumno findById(Long id);
 
@@ -27,7 +20,6 @@ public interface IAlumnoService {
 
 	public void delete(Long id);
 	
-	public Alumno replace(AlumnoSoloAfiliado alumnoAfiliado, Alumno alumno);
 	
 
 }

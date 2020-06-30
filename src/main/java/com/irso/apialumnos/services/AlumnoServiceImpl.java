@@ -1,6 +1,5 @@
 package com.irso.apialumnos.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-
 import com.irso.apialumnos.exceptions.BadRequestException;
 import com.irso.apialumnos.exceptions.ConflictException;
 import com.irso.apialumnos.exceptions.ResourceNotFoundException;
 import com.irso.apialumnos.exceptions.ValidationException;
 import com.irso.apialumnos.models.dao.IAlumnoDao;
 import com.irso.apialumnos.models.entity.Alumno;
-import com.irso.apialumnos.models.entity.AlumnoSoloAfiliado;
 
 @Service
 public class AlumnoServiceImpl implements IAlumnoService {
@@ -28,26 +25,13 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	@Autowired
 	private IAlumnoDao alumnoDao;
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<Alumno> findAll() {
-		return (List<Alumno>) alumnoDao.findAll();
-
-	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Page<Alumno> findAll(Pageable pageable) {
+	public Page<Alumno> findAllByOrderByIdAsc(Pageable pageable) {
 		return alumnoDao.findAll(pageable);
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<Alumno> findAllByOrderByIdAsc() {
-		// TODO Auto-generated method stub
-		return (List<Alumno>) alumnoDao.findAllByOrderByIdAsc();
-
-	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -166,25 +150,5 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		// TODO Auto-generated method stub
 		alumnoDao.deleteById(id);
 	}
-
-	
-
-	@Override
-	public Alumno replace(AlumnoSoloAfiliado alumnoAfiliado, Alumno alumno) {
-		
-		if(alumnoAfiliado.getAfiliado().equals(NO) || alumnoAfiliado.getAfiliado().equals(SI)) {
-			alumno.setAfiliado(alumnoAfiliado.getAfiliado());
-						
-		}else {
-
-			throw new BadRequestException("Codigo Error: 8. Afiliado debe ser 'S' o 'N'." );
-				
-		}
-		
-		return alumnoDao.save(alumno);
-	}
-
-	
-
 
 }

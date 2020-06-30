@@ -1,6 +1,5 @@
 package com.irso.apialumnos.controllers;
 
-import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.irso.apialumnos.models.entity.Alumno;
-import com.irso.apialumnos.models.entity.AlumnoSoloAfiliado;
 import com.irso.apialumnos.services.IAlumnoService;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
@@ -35,30 +32,26 @@ public class AlumnoRestController {
 	private IAlumnoService alumnoService;
 
 	
-	/*
-	 * @GetMapping("/alumnos") private List<Alumno> index() { return
-	 * alumnoService.findAllByOrderByIdAsc(); }
-	 */
-	 
-	
-	/*
-	 * @GetMapping("/alumnos/page/{page}") private Page<Alumno> index(@PathVariable
-	 * int page) { Pageable pageable = PageRequest.of(page, 8); return
-	 * alumnoService.findAll(pageable); }
-	 */
-	 
+	@GetMapping("/usuarios")
+	private long findAlumnoByEmail(@RequestParam(required = true) String email) {
 
-		@GetMapping("/alumnos") // presencial/alumnos/id public
-		private Page<Alumno> index(@RequestParam(required = true) int page) {
+		Alumno alumno = alumnoService.findByEmail(email);
 
-			Pageable pageable = PageRequest.of(page, 8);
-			return alumnoService.findAll(pageable);
+		return alumno.getId();
 
-		}
+	}
+
+	@GetMapping("/alumnos") // api/alumnos
+	private Page<Alumno> index(@RequestParam(required = true) int page) {
+
+		Pageable pageable = PageRequest.of(page, 8);
+		return alumnoService.findAllByOrderByIdAsc(pageable);
+
+	}
 
 
 	
-	  @GetMapping("/alumnos/{id}") //presencial/alumnos/id public
+	  @GetMapping("/alumnos/{id}") //api/alumnos/id public
 	  ResponseEntity<Alumno> getAlumnoById(@PathVariable(value = "id") Long
 	  alumnoId) {
 	  
@@ -67,17 +60,6 @@ public class AlumnoRestController {
 	  return ResponseEntity.ok().body(alumno); }
 	 
 
-	/*
-	 * @GetMapping("/alumnos/emails/{email}") //presencial/alumnos/emails/email
-	 * public ResponseEntity<Alumno> getAlumnoByEmail(@PathVariable(value = "email")
-	 * String alumnoEmail) {
-	 * 
-	 * Alumno alumno = alumnoService.findByEmail(alumnoEmail);
-	 * 
-	 * //int forzar500= 1/0;
-	 * 
-	 * return ResponseEntity.ok().body(alumno); }
-	 */
 
 	@PostMapping("/alumnos")
 	@ResponseStatus(HttpStatus.CREATED) // guarda los datos enviados
@@ -110,16 +92,6 @@ public class AlumnoRestController {
 		alumnoService.delete(id);
 	}
 
-	@PatchMapping("/alumnos/{id}")
-	@ResponseStatus(HttpStatus.OK)
-	private Alumno replace(@RequestBody AlumnoSoloAfiliado alumnoAfiliado , @PathVariable Long id) {
-
-		Alumno alumno = alumnoService.findById(id);
-
-		Alumno alumnoUpdated = alumnoService.replace(alumnoAfiliado, alumno);
-
-		return alumnoUpdated;
-
-	}
+	
 
 }

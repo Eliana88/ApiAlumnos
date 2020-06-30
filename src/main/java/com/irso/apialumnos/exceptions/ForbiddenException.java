@@ -1,8 +1,8 @@
 package com.irso.apialumnos.exceptions;
 
-public class ValidationException extends BadRequestException {
+public class ForbiddenException extends RuntimeException {
 	
-	public ValidationException(String message) {
+	public ForbiddenException(String message) {
 		super(message);
 	}
 
