@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.irso.apialumnos.models.entity.Alumno;
 import com.irso.apialumnos.services.IAlumnoService;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = { "http://localhost:4200","https://alumnosirso.web.app/"})
 @RestController
 @RequestMapping("/api")
 public class AlumnoRestController {
