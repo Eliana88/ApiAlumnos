@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.irso.apialumnos.models.entity.Alumno;
 import com.irso.apialumnos.services.IAlumnoService;
 
-@CrossOrigin(origins = {"https://alumnosirso.web.app", "*"})
+@CrossOrigin(origins = {"https://alumnosirso.web.app", "http://localhost:4200"})
 @RestController
 @RequestMapping("/api")
 public class AlumnoRestController {
@@ -42,9 +42,10 @@ public class AlumnoRestController {
 	}
 
 	@GetMapping("/alumnos") // api/alumnos
-	private Page<Alumno> index(@RequestParam(required = true) int page) {
+	private Page<Alumno> index(@RequestParam(required = true) int page, @RequestParam(defaultValue = "8") int q){
+		
 
-		Pageable pageable = PageRequest.of(page, 8);
+		Pageable pageable = PageRequest.of(page, q);
 		return alumnoService.findAllByOrderByIdAsc(pageable);
 
 	}
