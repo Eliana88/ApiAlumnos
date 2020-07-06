@@ -54,9 +54,7 @@ public class AlumnoServiceImpl implements IAlumnoService {
 
 	@Override
 	@Transactional
-	public Alumno save(Alumno alumno, BindingResult result) {
-		
-		
+	public Alumno save(Alumno alumno, BindingResult result) {	
 		
 		if (result.hasErrors()) {
 

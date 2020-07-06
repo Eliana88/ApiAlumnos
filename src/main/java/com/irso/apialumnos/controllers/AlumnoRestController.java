@@ -41,11 +41,9 @@ public class AlumnoRestController {
 
 	}
 
-	@GetMapping("/alumnos") // api/alumnos
-	private Page<Alumno> index(@RequestParam(required = true) int page, @RequestParam(defaultValue = "8") int q){
+	@GetMapping("/alumnos") // api/alumnos ---> enviar parametro page y size
+	private Page<Alumno> listar(Pageable pageable){
 		
-
-		Pageable pageable = PageRequest.of(page, q);
 		return alumnoService.findAllByOrderByIdAsc(pageable);
 
 	}
