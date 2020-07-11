@@ -31,7 +31,7 @@ public class AppAlumnosIrsoApplication implements CommandLineRunner{
 	
 
 	public void run(String... args) throws Exception {
-		String password = "irsotest";
+		String password = "pruebas";
 		
 		for (int i = 0; i < 4; i++) {
 			String passwordBCrypt = passwordEncode.encode(password);

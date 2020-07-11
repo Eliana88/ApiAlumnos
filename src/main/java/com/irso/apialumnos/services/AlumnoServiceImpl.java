@@ -36,7 +36,6 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	@Override
 	@Transactional(readOnly = true)
 	public Alumno findById(Long id) {
-		// TODO Auto-generated method stub
 		return alumnoDao.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Codigo Error: 1. Alumno no encontrado con ID: " + id + "."));
 
@@ -45,11 +44,16 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	@Override
 	@Transactional(readOnly = true)
 	public Alumno findByEmail(String email) {
-		// TODO Auto-generated method stub
+
 		Alumno alumno = alumnoDao.findByEmail(email);
+		
+		if (alumno == null) {
+			throw new ResourceNotFoundException("Codigo Error: 1. Alumno no encontrado con email: " + email + ".");
+			
+		}else {
 
 		return alumno;
-
+		}
 	}
 
 	@Override
