@@ -48,12 +48,12 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		Alumno alumno = alumnoDao.findByEmail(email);
 		
 		if (alumno == null) {
-			throw new ResourceNotFoundException("Codigo Error: 1. Alumno no encontrado con email: " + email + ".");
-			
-		}else {
+			throw new ResourceNotFoundException("Alumno no encontrado con email: " + email);
 
-		return alumno;
+		} else {
+			return alumno;
 		}
+		
 	}
 
 	@Override

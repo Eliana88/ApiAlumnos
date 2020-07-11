@@ -35,8 +35,10 @@ public class AlumnoRestController {
 	private long findAlumnoByEmail(@RequestParam(required = true) String email) {
 
 		Alumno alumno = alumnoService.findByEmail(email);
+		
+		long alumnoId = alumno.getId();
 
-		return alumno.getId();
+		return alumnoId;
 
 	}
 
